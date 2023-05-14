@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  height: 74px;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 45px;
+  max-width: 880px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  margin: auto;
+}
+
+.header__Logo {
+  max-width: 173px;
+  height: 33px;
+  object-fit: contain;
+  margin-bottom: 41px;
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    max-width: 320px;
+    height: 56px;
+    margin: 0;
+  }
+
+  .header__Logo {
+    width: 126px;
+    height: 24px;
+    padding-bottom: 32px;
+    padding-left: 27px;
+    padding-top: 28px;
+  }
+}
