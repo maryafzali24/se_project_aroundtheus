@@ -19,7 +19,6 @@
   grid-area: button;
   border: solid 1px white;
   align-self: center;
-  /* margin-left: 18px; */
   padding: 0;
   margin: 0;
   cursor: pointer;
@@ -89,26 +88,33 @@
   .profile {
     flex-direction: column;
     margin: 0;
+    text-align: center;
   }
 
   .profile__info {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     justify-content: center;
-    width: 100%;
+    max-width: 282px;
   }
 
-  .profile__picture {
-    margin-top: 38px;
+  .profile__image {
+    margin-top: 38;
   }
 
   .profile__description {
     width: 100%;
     text-align: center;
+    padding-bottom: 36px;
+  }
+
+  .profile__title {
+    text-align: center;
   }
 
   .profile__add-button {
-    margin: 0;
-    width: 100%;
+    width: 282px;
+    padding-right: 19px;
+    padding-left: 19px;
+    padding-bottom: 36px;
   }
 }

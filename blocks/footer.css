@@ -1,26 +1,23 @@
 .footer {
   color: #545454;
-  max-width: 318px;
-  margin-top: 67px;
-  margin-bottom: 60px;
-  margin-left: 200px;
-  margin-right: 762px;
+  max-width: 880px;
+  margin: 67px 200px 60px;
 }
 .footer__copyright {
   font-family: "Inter", sans-serif;
+  font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  line-height: 1.2;
+  line-height: 22px;
   margin: 0;
 }
 
-@media screen and (max-width: 480) {
+@media screen and (max-width: 480px) {
   .footer {
     max-width: 282px;
-    padding: 48px 19px 36px;
-    text-align: left;
+    margin: 48px 19px 36px;
   }
   .footer__copyright {
-    line-height: 1.2;
+    font-size: 14px;
   }
 }
