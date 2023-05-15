@@ -1,11 +1,10 @@
-footer {
+.footer {
   color: #545454;
-  width: 318px;
-  display: flex;
-  justify-content: left;
-  margin-left: 200px;
-  margin-bottom: 60px;
+  max-width: 318px;
   margin-top: 67px;
+  margin-bottom: 60px;
+  margin-left: 200px;
+  margin-right: 762px;
 }
 .footer__copyright {
   font-family: "Inter", sans-serif;
@@ -22,7 +21,6 @@ footer {
     text-align: left;
   }
   .footer__copyright {
-    font-size: 14px;
     line-height: 1.2;
   }
 }
