@@ -16,4 +16,4 @@ The page will be responsive for both desktop and mobile application.
 
 **Github Link**
 
-- [ link to the project on Github](https://github.com/maryafzali24/se_project_aroundtheus)
+- [ link to the project on Github Page](http://maryafzali24.github.io/se_project_aroundtheus)
