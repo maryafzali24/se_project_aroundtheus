@@ -9,9 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 19px;
-  padding-right: 19px;
-  /* display: none; */
+  /* padding-left: 19px;
+  padding-right: 19px; */
+  padding: 0 19px;
+  display: none;
 }
 
 .modal__open {
@@ -20,16 +21,14 @@
 
 .modal__container {
   background-color: rgb(255, 255, 255);
+  color: black;
   border-radius: 10px;
-  padding-left: 36px;
-  padding-top: 34px;
-  padding-bottom: 36px;
-  padding-right: 36px;
-  margin: auto;
+  display: flex;
+  padding: 36px;
+  flex-direction: column;
   position: relative;
   width: 430px;
   height: 330px;
-  box-sizing: border-box;
 }
 .modal__close-button {
   background: transparent url(../images/Close\ button.svg) center no-repeat;
@@ -49,14 +48,14 @@
   font-size: 24px;
   line-height: 29px;
   color: rgb(0, 0, 0);
-  padding-bottom: 54px;
+  padding-bottom: 52px;
   margin: 0;
-  width: 330px;
-  height: 23px;
+  /* width: 330px;
+  height: 23px; */
 }
 
-.modal.form {
-  padding-bottom: 20px;
+.modal__form {
+  width: fit-content;
 }
 
 .modal__form-name {
@@ -67,10 +66,16 @@
   line-height: 17px;
   color: rgb(0, 0, 0);
   border: none;
+  width: 358px;
+  height: 17px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 14px;
-  width: 100%;
+  outline: none;
   margin-bottom: 30px;
+  padding-top: 0px;
+  padding-bottom: 8px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .modal__form-description {
@@ -82,7 +87,13 @@
   color: rgb(0, 0, 0);
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  width: 100%;
+  width: 358px;
+  height: 17px;
+  outline: none;
+  padding-top: 0px;
+  padding-bottom: 8px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .modal__button {
@@ -94,38 +105,44 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
-  width: 100%;
+  width: 358px;
   height: 50px;
   border-radius: 2px;
   border: none;
   padding: 0;
-  margin-top: 45px;
+  margin-top: 48px;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 480px) {
   .modal__container {
-    width: 282px;
-    height: 322px;
-    box-sizing: border-box;
+    width: 238px;
+    height: 272px;
+    padding: 22px 25px;
+  }
+
+  .modal__form {
+    width: fit-content;
   }
 
   .modal__heading {
-    padding-bottom: 75px;
-    max-width: 238px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .modal__form-description {
+    width: 238px;
   }
   .modal__close-button {
     width: 26px;
     height: 26px;
-    /* left: 375px;
-    top: -44px; */
-    bottom: calc(100% + 13px);
-    left: calc(100% - 30px);
+    top: -39px;
+    left: 256px;
   }
 
   .modal__button {
-    margin-top: 45px;
+    width: 238px;
     font-size: 14px;
     line-height: 17px;
-    height: 46px;
   }
 }
