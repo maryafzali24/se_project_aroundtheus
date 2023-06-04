@@ -54,7 +54,7 @@ function closePopup() {
 
 function getCardElement(cardData) {
   //  clone the template element with all its content and store it in a cardElement variable
-  const cardElement = cardTemplate.cloneNode(ture);
+  const cardElement = cardTemplate.cloneNode(true);
   //  access the card title and image and store them in variables
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
@@ -87,10 +87,6 @@ profileEditButton.addEventListener("click", () => {
 modalEditCloseButton.addEventListener("click", closePopup);
 
 profileForm.addEventListener("submit", handleFormSubmit);
-
-// for (let i = 0; i < initialCards.length; i++) {
-//   const cardElement = initialCards[i];
-// }
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
