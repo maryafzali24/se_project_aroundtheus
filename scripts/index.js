@@ -37,8 +37,8 @@ const modalEditCloseButton = profileEditModal.querySelector(
 
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const inputName = document.querySelector(".modal__form-name");
-const inputDescription = document.querySelector(".modal__form-description");
+const inputName = document.querySelector("#modal-form-name");
+const inputDescription = document.querySelector("#modal-form-description");
 const profileForm = document.querySelector(".modal__form");
 const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
@@ -58,10 +58,20 @@ function getCardElement(cardData) {
   //  access the card title and image and store them in variables
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  //set the card title to the name field of the object, too
   cardTitleEl.textContent = cardData.name;
+  //set the path to the image to the link field of the object
   cardImageEl.src = cardData.link;
+  //set the image alt text to the name field of the object
   cardImageEl.alt = cardData.name;
+  //return the ready HTML element with the filled-in datafunction closePopup() {
   return cardElement;
+}
+
+function openPopup() {
+  inputName.value = profileTitle.textContent;
+  inputDescription.value = profileDescription.textContent;
+  profileEditModal.classList.add("modal_opened");
 }
 
 /* ******************************************************************************* */
@@ -78,11 +88,8 @@ function handleFormSubmit(evt) {
 /* ******************************************************************************* */
 /*                                 Event Listeners                                 */
 /* ******************************************************************************* */
-profileEditButton.addEventListener("click", () => {
-  inputName.value = profileTitle.textContent;
-  inputDescription.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal_opened");
-});
+
+profileEditButton.addEventListener("click", openPopup);
 
 modalEditCloseButton.addEventListener("click", closePopup);
 

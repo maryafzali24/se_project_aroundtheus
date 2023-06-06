@@ -1,8 +1,10 @@
 .profile {
   display: flex;
   align-items: center;
-  padding: 40px 0 32px;
-  margin-bottom: 0;
+  /* padding: 40px 0 32px;
+  margin-bottom: 0; */
+  padding-top: 40px;
+  padding-bottom: 47px;
 }
 
 .profile__info {
@@ -87,7 +89,7 @@
 @media screen and (max-width: 621px) {
   .profile {
     padding: 0;
-    margin: 42px 0 36px;
+    margin: 38px 0 36px;
     flex-direction: column;
     text-align: center;
   }
@@ -131,7 +133,7 @@
 @media screen and (max-width: 480px) {
   .profile {
     flex-direction: column;
-    margin: 0;
+    margin-bottom: 36px;
     text-align: center;
   }
 
@@ -155,6 +157,8 @@
   .profile__title {
     text-align: center;
     width: 196px;
+    line-height: 27px;
+    font-size: 22px;
   }
 
   .profile__add-button {

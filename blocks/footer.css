@@ -2,7 +2,8 @@
   color: #545454;
   width: 100%;
   max-width: 880px;
-  margin: 67px auto 60px;
+  margin: 67px auto 0;
+  padding-bottom: 60px;
 }
 .footer__copyright {
   font-family: "Inter", sans-serif;
@@ -16,10 +17,11 @@
 @media screen and (max-width: 635px) {
   .footer {
     max-width: 282px;
-    margin: 48px auto 36px;
+    margin: 12px auto 36px;
   }
   .footer__copyright {
     font-size: 14px;
     line-height: 17px;
+    margin: 0;
   }
 }

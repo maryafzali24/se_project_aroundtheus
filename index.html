@@ -45,7 +45,7 @@
         </section>
       </main>
       <footer id="footer" class="footer">
-        <p class="footer__copyright">&copy; 2022 Around The U.S.</p>
+        <p class="footer__copyright">&copy; 2023 Around The U.S.</p>
       </footer>
     </div>
     <div class="modal" id="profile-edit-modal">
@@ -56,20 +56,22 @@
           type="button"
         ></button>
         <h2 class="modal__heading">Edit profile</h2>
-        <form class="modal__form">
+        <form class="modal__form" name="profileEditForm">
           <input
             type="text"
-            class="modal__form-name"
+            class="modal__form-input"
+            id="modal-form-name"
             name="title"
             placeholder="Jacques Cousteau"
           />
           <input
             type="text"
-            class="modal__form-description"
+            class="modal__form-input"
+            id="modal-form-description"
             name="description"
             placeholder="Explorer"
           />
-          <button class="modal__form-button" type="button">Save</button>
+          <button class="modal__form-button" type="save">Save</button>
         </form>
       </div>
     </div>
