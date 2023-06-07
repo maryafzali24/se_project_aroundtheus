@@ -117,7 +117,7 @@
 @media screen and (max-width: 480px) {
   .modal__container {
     width: 238px;
-    padding: 22px 25px;
+    padding: 25px 22px;
   }
 
   .modal__form {
@@ -125,8 +125,10 @@
   }
 
   .modal__heading {
+    width: 100%;
     font-size: 18px;
     line-height: 22px;
+    padding-bottom: 75px;
   }
   .modal__form-input:first-child {
     width: 238px;
@@ -139,8 +141,7 @@
   }
 
   .modal__form-button {
-    width: 238px;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 16px;
   }
 }
