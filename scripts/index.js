@@ -26,13 +26,13 @@ const initialCards = [
 ];
 
 /* *************************************************************** */
-/*                            Element                              */
+/*                            Elements                              */
 /* *************************************************************** */
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const modalEditCloseButton = profileEditModal.querySelector(
-  "#modal-close-button"
+  ".modal__close-button"
 );
 
 const profileTitle = document.querySelector(".profile__title");
