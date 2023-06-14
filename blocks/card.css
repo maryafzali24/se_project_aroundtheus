@@ -53,9 +53,22 @@
 }
 
 .card__like-button:hover {
-  opacity: 50%;
+  opacity: 0.5;
   transition: 0.1s;
 }
-/* .card__like-button:active {
-  transform: scale(0.9);
-} */
+
+.card__delete-button {
+  background: transparent url(../images/trash-icon.svg) center no-repeat;
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  border: none;
+  top: 18px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.card__delete-button:hover {
+  opacity: 0.5;
+  transition: 0.1s;
+}
