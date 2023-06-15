@@ -78,17 +78,6 @@ function getCardElement(data) {
   //  access the card title and image and store them in variables
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-  // access delte button
-  // const deleteButton = cardElement.querySelector(".card__delete-button");
-
-  // deleteButton.addEventListener("click", () => {
-  //   cardElement.remove();
-  // });
   //set the card title to the name field of the object, too
   cardTitleEl.textContent = data.name;
   //set the path to the image to the link field of the object
@@ -96,6 +85,25 @@ function getCardElement(data) {
   //set the image alt text to the name field of the object
   cardImageEl.alt = data.name;
   //return the ready HTML element with the filled-in datafunction closePopup() {
+  const likeButton = cardElement.querySelector(".card__like-button");
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+  // access delte button
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  cardImageEl.addEventListener("click", () => {
+    imagePreview.src = data.link;
+    imagePreview.alt = data.name;
+    imgpreviewTitle.textContent = data.name;
+    openPopup(imgPreviewModal);
+  });
+
   return cardElement;
 }
 
@@ -124,6 +132,7 @@ function handleAddCardFormSubmit(evt) {
   const name = addCardTitle.value;
   const link = addCardUrl.value;
   renderCard({ name, link }, cardsWrap);
+  addCardForm.reset();
   closePopup(addCardModal);
 }
 
@@ -148,12 +157,10 @@ modalEditCloseButton.addEventListener("click", () =>
 //add new card button
 addNewCardButton.addEventListener("click", () => openPopup(addCardModal));
 
-// cardImageEl.addEventListener("click", () => {
-//   imagePreview.src = cardImageEl.src;
-//   imgpreviewTitle.textContent = cardTitleEl.textContent;
-//   openPopup(imgPreviewModal);
-// });
-
 addCardCloseButton.addEventListener("click", () => closePopup(addCardModal));
+
+imgPreviewCloseButton.addEventListener("click", () => {
+  closePopup(imgPreviewModal);
+});
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
