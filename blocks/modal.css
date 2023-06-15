@@ -136,21 +136,6 @@
   color: #fff;
   letter-spacing: 0cm;
 }
-/*
-#modal-preview-close-button {
-  background: transparent url(../images/Close\ button.svg) center no-repeat;
-  border: none;
-  position: absolute;
-  bottom: calc(100% + 5px);
-  left: calc(100% + 5px);
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-}
-#modal-preview-close-button:hover {
-  opacity: 0.6;
-  cursor: pointer;
-} */
 
 @media screen and (max-width: 620px) {
   .modal__close-button {
@@ -163,13 +148,12 @@
   .modal__image-preview {
     max-width: 75vw;
     max-height: 75vh;
-    /* margin-top: 136px; */
   }
 
   .modal__close-button_type_preview {
     height: 30px;
     width: 30px;
-    /* top: 100px; */
+    left: calc(100% + 5px);
   }
 }
 
@@ -204,15 +188,6 @@
     align-items: flex-start;
   }
 
-  /* #modal-preview-close-button {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    left: 92.25%;
-    right: -1.63%;
-    top: 100px;
-  } */
-
   .modal__form-button {
     font-size: 14px;
     line-height: 16px;
@@ -222,8 +197,6 @@
     height: 30px;
     width: 30px;
     position: absolute;
-    top: 100px;
-    /* left: 295.21px;
-    bottom: 425.57px; */
+    left: calc(100% + 5px);
   }
 }
