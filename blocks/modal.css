@@ -112,12 +112,14 @@
 
 .modal__preview-container {
   background-color: transparent;
-  width: 433px;
-  height: 540px;
+  max-width: 433px;
+  max-height: 540px;
   position: relative;
+  border-radius: 0px;
   display: flex;
   flex-direction: column;
   padding: 0;
+  margin: 0;
 }
 
 .modal__image-preview {
@@ -134,7 +136,7 @@
   color: #fff;
   letter-spacing: 0cm;
 }
-
+/*
 #modal-preview-close-button {
   background: transparent url(../images/Close\ button.svg) center no-repeat;
   border: none;
@@ -148,7 +150,7 @@
 #modal-preview-close-button:hover {
   opacity: 0.6;
   cursor: pointer;
-}
+} */
 
 @media screen and (max-width: 620px) {
   .modal__close-button {
@@ -161,7 +163,7 @@
   .modal__image-preview {
     max-width: 75vw;
     max-height: 75vh;
-    margin-top: 136px;
+    /* margin-top: 136px; */
   }
 }
 @media screen and (max-width: 480px) {
@@ -195,14 +197,14 @@
     align-items: flex-start;
   }
 
-  #modal-preview-close-button {
+  /* #modal-preview-close-button {
     width: 30px;
     height: 30px;
     position: absolute;
     left: 92.25%;
     right: -1.63%;
     top: 100px;
-  }
+  } */
 
   .modal__form-button {
     font-size: 14px;
