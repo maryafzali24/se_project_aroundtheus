@@ -38,6 +38,7 @@ const imgpreviewTitle = imgPreviewModal.querySelector(".modal__image-title");
 const imgPreviewCloseButton = imgPreviewModal.querySelector(
   "#modal-preview-close-button"
 );
+const modals = document.querySelectorAll(".modal");
 
 //Wrappers
 const cardsWrap = document.querySelector(".cards__list");
@@ -69,7 +70,8 @@ const addCardUrl = addCardForm.querySelector("#modal-form-url");
 /* ******************************************************************************* */
 
 function closePopup(modal) {
-  modal.classList.remove("modal_opened");
+  modal.classList.remove("modal__opened");
+  document.removeEventListener("keyup", isEscEvent);
 }
 
 function getCardElement(data) {
@@ -108,8 +110,22 @@ function getCardElement(data) {
 }
 
 function openPopup(modal) {
-  modal.classList.add("modal_opened");
+  modal.classList.add("modal__opened");
+  document.addEventListener("keyup", isEscEvent);
 }
+
+// close the popup when the Esc button is pressed
+const isEscEvent = (evt) => {
+  evt.preventDefault();
+  if (evt.key === "Escape") {
+    modals.forEach((modal) => {
+      const openedPopup = modal.classList.contains("modal__opened");
+      if (openedPopup) {
+        closePopup(modal);
+      }
+    });
+  }
+};
 
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
@@ -164,3 +180,14 @@ imgPreviewCloseButton.addEventListener("click", () => {
 });
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
+
+// Closing the popup by clicking on the overlay anywhere outside the popup.
+const closeModal = (evt) => {
+  if (evt.target.classList.contains("modal__opened")) {
+    closePopup(evt.currentTarget);
+  }
+};
+
+modals.forEach((modal) => {
+  modal.addEventListener("mousedown", closeModal);
+});

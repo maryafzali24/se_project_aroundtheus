@@ -15,7 +15,7 @@
   transition: visibility 0s linear 0.5s, opacity 0.5s ease-out;
 }
 
-.modal_opened {
+.modal__opened {
   visibility: visible;
   transition-delay: 0s;
   opacity: 1;
@@ -63,7 +63,7 @@
   width: fit-content;
 }
 
-.modal__form-input {
+.modal__input {
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -77,16 +77,38 @@
   outline: none;
   margin-top: 30px;
   padding-top: 0px;
-  padding-bottom: 12px;
+  padding-bottom: 13px;
   padding-left: 0px;
   padding-right: 0px;
 }
 
-.modal__form-input:first-child {
+.modal__input:first-child {
   margin-top: 0;
 }
 
-.modal__form-button {
+.modal__input_type_error {
+  border-bottom: 1px solid #ff0000;
+}
+
+.modal__error {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+  min-height: 12px;
+  color: #ff0000;
+  align-self: flex-start;
+  transition: opacity 0.3s;
+  visibility: hidden;
+}
+
+.modal__error_visible {
+  visibility: visible;
+}
+
+.modal__button {
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
   font-family: "Inter", sans-serif;
@@ -105,9 +127,21 @@
   justify-content: center;
 }
 
-.modal__form-buttomn:hover {
+.modal__button:hover {
   cursor: pointer;
   opacity: 80%;
+}
+
+.modal__button_disabled {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.modal__button_disabled:hover {
+  cursor: default;
+  opacity: 1;
 }
 
 .modal__preview-container {
@@ -173,7 +207,7 @@
     line-height: 22px;
     padding-bottom: 75px;
   }
-  .modal__form-input:first-child {
+  .modal__input:first-child {
     width: 238px;
   }
   .modal__close-button {
@@ -188,7 +222,7 @@
     align-items: flex-start;
   }
 
-  .modal__form-button {
+  .modal__button {
     font-size: 14px;
     line-height: 16px;
   }
