@@ -3,8 +3,8 @@ import FormValidator from "../compnents/FormValidator.js";
 
 import {
   openPopup,
-  closePopup,
   isEscEvent,
+  closePopup,
   closeModal,
 } from "../utils/utils.js";
 
@@ -56,7 +56,7 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
-// const imgPreviewModal = document.querySelector("#preview-image-modal");
+const imgPreviewModal = document.querySelector("#preview-image-modal");
 const imagePreview = imgPreviewModal.querySelector(".modal__image-preview");
 const imgpreviewTitle = imgPreviewModal.querySelector(".modal__image-title");
 const imgPreviewCloseButton = imgPreviewModal.querySelector(
@@ -108,8 +108,8 @@ const editFormValidator = new FormValidator(validationSettings, profileForm);
 const addFormValidator = new FormValidator(validationSettings, addCardForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-editFormValidator.toggleButtonState();
-addFormValidator.toggleButtonState();
+// editFormValidator.toggleButtonState();
+// addFormValidator.toggleButtonState();
 
 // function getCardElement(data) {
 //   //  clone the template element with all its content and store it in a cardElement variable
@@ -178,6 +178,8 @@ function handleProfileFormSubmit(evt) {
   profileDescription.textContent = inputDescription.value;
   evt.target.reset();
   closePopup(profileEditModal);
+
+  // editFormValidator.toggleButtonState();
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -188,6 +190,8 @@ function handleAddCardFormSubmit(evt) {
   evt.target.reset();
   // addCardForm.reset();
   closePopup(addCardModal);
+
+  // addFormValidator.toggleButtonState();
 }
 
 /* ******************************************************************************* */
@@ -210,8 +214,6 @@ modalEditCloseButton.addEventListener("click", () =>
 
 //add new card button
 addNewCardButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent.trim();
-  profileDescriptionInput.value = profileDescription.textContent.trim();
   openPopup(addCardModal);
 });
 

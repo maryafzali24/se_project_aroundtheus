@@ -8,10 +8,11 @@ export function closePopup(modal) {
   document.removeEventListener("keyup", isEscEvent);
 }
 
-// close the popup when the Esc button is pressed
+//close the popup when the Esc button is pressed
 export function isEscEvent(evt) {
   evt.preventDefault();
   if (evt.key === "Escape") {
+    const modals = document.querySelectorAll(".modal");
     modals.forEach((modal) => {
       const openedPopup = modal.classList.contains("modal__opened");
       if (openedPopup) {
@@ -20,6 +21,13 @@ export function isEscEvent(evt) {
     });
   }
 }
+
+// export function isEscEvent(evt) {
+//   if (evt.key === "Escape") {
+//     const openedModal = document.querySelector(".modal__opened");
+//     closePopup(openedModal);
+//   }
+// }
 
 export function closeModal(evt) {
   if (evt.target.classList.contains("modal__opened")) {
