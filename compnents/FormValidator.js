@@ -1,6 +1,7 @@
 class FormValidator {
   constructor(settings, formElement) {
     this._formElement = formElement;
+    this._inputSelector = settings.inputSelector;
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
@@ -21,7 +22,7 @@ class FormValidator {
     errorMessageEl.classList.add(this._errorClass);
   }
 
-  hideInputError(inputElement) {
+  _hideInputError(inputElement) {
     const errorMessageEl = this._querySelector(`#${inputElement.id}-error`);
 
     inputElement.classList.remove(this._inputErrorClass);
@@ -72,7 +73,7 @@ class FormValidator {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    this._setEventListeners();
+    this._setEventListeners(this._formElement);
   }
 }
 export default FormValidator;
