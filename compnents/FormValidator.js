@@ -23,7 +23,9 @@ class FormValidator {
   }
 
   _hideInputError(inputElement) {
-    const errorMessageEl = this._querySelector(`#${inputElement.id}-error`);
+    const errorMessageEl = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
 
     inputElement.classList.remove(this._inputErrorClass);
     errorMessageEl.textContent = "";
@@ -38,19 +40,34 @@ class FormValidator {
     }
   }
 
+  // _hasInvalidInput() {
+  //   return this._inputList.some((input) => {
+  //     return !input.validity.valid;
+  //   });
+  // }
+
   _hasInvalidInput() {
-    return this._inputList.some((input) => {
-      return !input.validity.valid;
-    });
+    return this._inputList.every((input) => input.validity.valid);
   }
 
+  // toggleButtonState() {
+  //   if (this._hasInvalidInput(this._inputList) {
+  //     this._submitButton.classList.add(this._inactiveButtonClass);
+  //     return (this._submitButton.disabled = true);
+  //   } else {
+  //     this._submitButton.classList.remove(this._inactiveButtonClass);
+  //     return (this._submitButton.disabled = false);
+  //   }
+  // }
+
   toggleButtonState() {
-    if (this._hasInvalidInput(this._inputList)) {
-      this._submitButton.classList.add(this._inactiveButtonClass);
-      return (this._submitButton.disabled = true);
-    } else {
+    const isFormValid = this._hasInvalidInput();
+    if (isFormValid) {
       this._submitButton.classList.remove(this._inactiveButtonClass);
-      return (this._submitButton.disabled = false);
+      this._submitButton.disabled = false;
+    } else {
+      this._submitButton.classList.add(this._inactiveButtonClass);
+      this._submitButton.disabled = true;
     }
   }
 
@@ -73,7 +90,7 @@ class FormValidator {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    this._setEventListeners(this._formElement);
+    this._setEventListeners();
   }
 }
 export default FormValidator;
