@@ -108,8 +108,8 @@ const editFormValidator = new FormValidator(validationSettings, profileForm);
 const addFormValidator = new FormValidator(validationSettings, addCardForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-// editFormValidator.toggleButtonState();
-// addFormValidator.toggleButtonState();
+// // editFormValidator.toggleButtonState();
+// // addFormValidator.toggleButtonState();
 
 // function getCardElement(data) {
 //   //  clone the template element with all its content and store it in a cardElement variable

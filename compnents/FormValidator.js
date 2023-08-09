@@ -73,7 +73,6 @@ class FormValidator {
       evt.preventDefault();
     });
     this._setEventListeners();
-    // this.toggleButtonState();
   }
 }
 export default FormValidator;
