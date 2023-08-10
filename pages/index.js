@@ -93,10 +93,6 @@ const addCardUrl = addCardForm.querySelector("#modal-form-url");
 /*                                 Functions                                       */
 /* ******************************************************************************* */
 
-// function closePopup(modal) {
-//   modal.classList.remove("modal__opened");
-//   document.removeEventListener("keyup", isEscEvent);
-// }
 const cardSelector = "#card-template";
 
 const card = new Card(cardData, cardSelector);
@@ -108,60 +104,6 @@ const editFormValidator = new FormValidator(validationSettings, profileForm);
 const addFormValidator = new FormValidator(validationSettings, addCardForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-// // editFormValidator.toggleButtonState();
-// // addFormValidator.toggleButtonState();
-
-// function getCardElement(data) {
-//   //  clone the template element with all its content and store it in a cardElement variable
-//   const cardElement = cardTemplate.cloneNode(true);
-//   //  access the card title and image and store them in variables
-//   const cardImageEl = cardElement.querySelector(".card__image");
-//   const cardTitleEl = cardElement.querySelector(".card__title");
-//   //set the card title to the name field of the object, too
-//   cardTitleEl.textContent = data.name;
-//   //set the path to the image to the link field of the object
-//   cardImageEl.src = data.link;
-//   //set the image alt text to the name field of the object
-//   cardImageEl.alt = data.name;
-//   //return the ready HTML element with the filled-in datafunction closePopup() {
-
-// likeButton.addEventListener("click", () => {
-//   likeButton.classList.toggle("card__like-button_active");
-// });
-// // access delete button
-// const deleteButton = cardElement.querySelector(".card__delete-button");
-
-// deleteButton.addEventListener("click", () => {
-//   cardElement.remove();
-// }); // const likeButton = cardElement.querySelector(".card__like-button");
-
-// cardImageEl.addEventListener("click", () => {
-//   imagePreview.src = data.link;
-//   imagePreview.alt = data.name;
-//   imgpreviewTitle.textContent = data.name;
-//   openPopup(imgPreviewModal);
-// });
-
-//   return cardElement;
-// }
-
-// function openPopup(modal) {
-//   modal.classList.add("modal__opened");
-//   document.addEventListener("keyup", isEscEvent);
-// }
-
-// // close the popup when the Esc button is pressed
-// const isEscEvent = (evt) => {
-//   evt.preventDefault();
-//   if (evt.key === "Escape") {
-//     modals.forEach((modal) => {
-//       const openedPopup = modal.classList.contains("modal__opened");
-//       if (openedPopup) {
-//         closePopup(modal);
-//       }
-//     });
-//   }
-// };
 
 function renderCard(cardData, wrapper) {
   const card = new Card(cardData, cardSelector);
@@ -224,13 +166,6 @@ imgPreviewCloseButton.addEventListener("click", () => {
 });
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
-
-//Closing the popup by clicking on the overlay anywhere outside the popup.
-// const closeModal = (evt) => {
-//   if (evt.target.classList.contains("modal__opened")) {
-//     closePopup(evt.currentTarget);
-//   }
-// };
 
 modals.forEach((modal) => {
   modal.addEventListener("mousedown", closeModal);

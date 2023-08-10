@@ -22,13 +22,6 @@ export function isEscEvent(evt) {
   }
 }
 
-// export function isEscEvent(evt) {
-//   if (evt.key === "Escape") {
-//     const openedModal = document.querySelector(".modal__opened");
-//     closePopup(openedModal);
-//   }
-// }
-
 export function closeModal(evt) {
   if (evt.target.classList.contains("modal__opened")) {
     closePopup(evt.currentTarget);
