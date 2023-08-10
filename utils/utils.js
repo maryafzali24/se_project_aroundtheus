@@ -1,10 +1,10 @@
 export function openPopup(modal) {
-  modal.classList.add("modal__opened");
+  modal.classList.add("modal_opened");
   document.addEventListener("keyup", isEscEvent);
 }
 
 export function closePopup(modal) {
-  modal.classList.remove("modal__opened");
+  modal.classList.remove("modal_opened");
   document.removeEventListener("keyup", isEscEvent);
 }
 
@@ -14,7 +14,7 @@ export function isEscEvent(evt) {
   if (evt.key === "Escape") {
     const modals = document.querySelectorAll(".modal");
     modals.forEach((modal) => {
-      const openedPopup = modal.classList.contains("modal__opened");
+      const openedPopup = modal.classList.contains("modal_opened");
       if (openedPopup) {
         closePopup(modal);
       }
@@ -23,7 +23,7 @@ export function isEscEvent(evt) {
 }
 
 export function closeModal(evt) {
-  if (evt.target.classList.contains("modal__opened")) {
+  if (evt.target.classList.contains("modal_opened")) {
     closePopup(evt.currentTarget);
   }
 }

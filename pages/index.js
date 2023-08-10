@@ -1,4 +1,4 @@
-import Card from "../compnents/card.js";
+import Card from "../compnents/Card.js";
 import FormValidator from "../compnents/FormValidator.js";
 
 import {
@@ -97,7 +97,7 @@ const cardSelector = "#card-template";
 
 const card = new Card(cardData, cardSelector);
 card.getView();
-
+s;
 /*******************************Form Validation*************************** */
 
 const editFormValidator = new FormValidator(validationSettings, profileForm);
@@ -120,8 +120,7 @@ function handleProfileFormSubmit(evt) {
   profileDescription.textContent = inputDescription.value;
   evt.target.reset();
   closePopup(profileEditModal);
-
-  // editFormValidator.toggleButtonState();
+  editFormValidator.toggleButtonState;
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -130,10 +129,9 @@ function handleAddCardFormSubmit(evt) {
   const link = addCardUrl.value;
   renderCard({ name, link }, cardsWrap);
   evt.target.reset();
-  // addCardForm.reset();
   closePopup(addCardModal);
 
-  // addFormValidator.toggleButtonState();
+  addFormValidator.toggleButtonState();
 }
 
 /* ******************************************************************************* */
