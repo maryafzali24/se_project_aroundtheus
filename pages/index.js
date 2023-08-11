@@ -97,7 +97,7 @@ const cardSelector = "#card-template";
 
 const card = new Card(cardData, cardSelector);
 card.getView();
-s;
+
 /*******************************Form Validation*************************** */
 
 const editFormValidator = new FormValidator(validationSettings, profileForm);
