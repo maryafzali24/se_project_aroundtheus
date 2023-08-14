@@ -1,5 +1,5 @@
-import Card from "../compnents/Card.js";
-import FormValidator from "../compnents/FormValidator.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 import {
   openPopup,
