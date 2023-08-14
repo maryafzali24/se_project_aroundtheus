@@ -22,7 +22,7 @@ export function isEscEvent(evt) {
   }
 }
 
-export function closeModal(evt) {
+export function handleOverlay(evt) {
   if (evt.target.classList.contains("modal_opened")) {
     closePopup(evt.currentTarget);
   }

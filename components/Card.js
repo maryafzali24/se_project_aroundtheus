@@ -1,8 +1,8 @@
 import {
   openPopup,
-  closePopup,
-  isEscEvent,
-  closeModal,
+  // closePopup,
+  // isEscEvent,
+  // handleOverlay,
 } from "../utils/utils.js";
 
 export default class Card {
@@ -13,7 +13,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    const imageElement = this._cardElement
+    this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
         this._handleImageClick();
@@ -64,5 +64,6 @@ export default class Card {
   _renderCard() {
     this._cardElement.querySelector(".card__title").textContent = this._name;
     this._cardElement.querySelector(".card__image").src = this._link;
+    this._cardElement.querySelector(".card__image").alt = this._name;
   }
 }

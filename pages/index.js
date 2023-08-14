@@ -5,7 +5,7 @@ import {
   openPopup,
   isEscEvent,
   closePopup,
-  closeModal,
+  handleOverlay,
 } from "../utils/utils.js";
 
 const initialCards = [
@@ -120,7 +120,7 @@ function handleProfileFormSubmit(evt) {
   profileDescription.textContent = inputDescription.value;
   evt.target.reset();
   closePopup(profileEditModal);
-  editFormValidator.toggleButtonState;
+  editFormValidator.toggleButtonState();
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -166,5 +166,5 @@ imgPreviewCloseButton.addEventListener("click", () => {
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
 modals.forEach((modal) => {
-  modal.addEventListener("mousedown", closeModal);
+  modal.addEventListener("mousedown", handleOverlay);
 });
