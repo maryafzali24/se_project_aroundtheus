@@ -95,8 +95,8 @@ const addCardUrl = addCardForm.querySelector("#modal-form-url");
 
 const cardSelector = "#card-template";
 
-const card = new Card(cardData, cardSelector);
-card.getView();
+// const card = new Card(cardData, cardSelector);
+// card.getView();
 
 /*******************************Form Validation*************************** */
 

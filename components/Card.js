@@ -5,6 +5,10 @@ import {
   // handleOverlay,
 } from "../utils/utils.js";
 
+const imgPreviewModal = document.querySelector("#preview-image-modal");
+const previewText = document.querySelector(".modal__image-title");
+const image = imgPreviewModal.querySelector(".modal__image-preview");
+
 export default class Card {
   constructor(cardData, cardSelector) {
     this._name = cardData.name;
@@ -34,6 +38,7 @@ export default class Card {
 
   _handleDeleteIcon() {
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
   _handleLikeIcon() {
@@ -43,12 +48,10 @@ export default class Card {
   }
 
   _handleImageClick() {
-    const imgPreviewModal = document.querySelector("#preview-image-modal");
+    image.src = this._link;
+    image.alt = this._name;
+    previewText.textContent = this._name;
     openPopup(imgPreviewModal);
-    imgPreviewModal.querySelector(".modal__image-preview").src = this._link;
-    imgPreviewModal.alt = this._name;
-    imgPreviewModal.querySelector(".modal__image-title").textContent =
-      this._name;
   }
 
   getView() {
