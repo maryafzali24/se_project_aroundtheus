@@ -1,27 +1,29 @@
-import {
-  openPopup,
-  // closePopup,
-  // isEscEvent,
-  // handleOverlay,
-} from "../utils/utils.js";
+// import {
+//   openPopup,
+//   closePopup,
+//   handleEscClose,
+//   closeModalOnRemoteClick,
+//   handleOverlay,
+// } from "../utils/utils.js";
 
 const imgPreviewModal = document.querySelector("#preview-image-modal");
 const previewText = document.querySelector(".modal__image-title");
 const image = imgPreviewModal.querySelector(".modal__image-preview");
 
 export default class Card {
-  constructor(cardData, cardSelector) {
-    this._name = cardData.name;
-    this._link = cardData.link;
+  constructor({ name, link }, cardSelector, handleCardClick) {
+    this._name = name;
+    this._link = link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
-    this._cardElement
-      .querySelector(".card__image")
-      .addEventListener("click", () => {
-        this._handleImageClick();
-      });
+    // this._cardElement
+    //   .querySelector(".card__image")
+    //   .addEventListener("click", () => {
+    //     this._handleImageClick();
+    //   });
 
     this._cardElement
       .querySelector(".card__like-button")
@@ -47,12 +49,12 @@ export default class Card {
       .classList.toggle("card__like-button_active");
   }
 
-  _handleImageClick() {
-    image.src = this._link;
-    image.alt = this._name;
-    previewText.textContent = this._name;
-    openPopup(imgPreviewModal);
-  }
+  // _handleImageClick() {
+  //   image.src = this._link;
+  //   image.alt = this._name;
+  //   previewText.textContent = this._name;
+  //   openPopup(imgPreviewModal);
+  // }
 
   getView() {
     this._cardElement = document
