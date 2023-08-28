@@ -1,4 +1,3 @@
-import { userInfo } from "os";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
@@ -6,7 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import "../pages/index.css";
+// import "../pages/index.css";
 
 import {
   initialCards,
@@ -93,7 +92,7 @@ const cardsList = new Section(
       //   const card = createCard(cardData);
       //   cardsList.addItem(card);
       // },
-      const card = new Card(cardData, cardSelector);
+      const card = new Card(cardData, cardSelector, imagePreviewPopup);
       cardsList.addItem(card.getView());
     },
   },
@@ -104,7 +103,7 @@ cardsList.renderItems();
 const userInfo = new UserInfo(profileTitle, profileDescription);
 
 const editFormValidator = new FormValidator(validationSettings, profileForm);
-editFormValidator.enableValidation();
+// editFormValidator.enableValidation();
 
 const addFormValidator = new FormValidator(validationSettings, addCardForm);
 addFormValidator.enableValidation();
@@ -119,14 +118,14 @@ function handleImageClick(data) {
 //   const card = new Card(cardData, cardSelector);
 //   return card.getView();
 // }
-/* ******************************************************************************* */
-/*                                 Event Handlers                                  */
-/* ******************************************************************************* */
+// /* ******************************************************************************* */
+// /*                                 Event Handlers                                  */
+// /* ******************************************************************************* */
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  // profileTitle.textContent = inputName.value;
-  // profileDescription.textContent = inputDescription.value;
+  profileTitle.textContent = inputName.value;
+  profileDescription.textContent = inputDescription.value;
   userInfo.setUserInfo(data.name, data.job);
   evt.target.reset();
   profileEditModal.close();
@@ -168,6 +167,6 @@ imgPreviewCloseButton.addEventListener("click", () => imgPreviewModal.close());
 
 // initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
-modals.forEach((modal) => {
-  modal.addEventListener("mousedown", handleOverlay);
-});
+// modals.forEach((modal) => {
+//   modal.addEventListener("mousedown", handleOverlay);
+// });

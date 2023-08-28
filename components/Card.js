@@ -15,6 +15,7 @@ export default class Card {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    // this._popupWithImage = popupWithImage;
     this._handleCardClick = handleCardClick;
   }
 
@@ -53,7 +54,7 @@ export default class Card {
   //   image.src = this._link;
   //   image.alt = this._name;
   //   previewText.textContent = this._name;
-  //   openPopup(imgPreviewModal);
+  //   imgPreviewModal.open();
   // }
 
   getView() {
