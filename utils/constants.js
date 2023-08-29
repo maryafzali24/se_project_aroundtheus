@@ -1,4 +1,4 @@
-export const initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -30,7 +30,7 @@ export const cardData = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
-export const validationSettings = {
+const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
@@ -39,4 +39,16 @@ export const validationSettings = {
   errorClass: "modal__error_visible",
 };
 
-export const cardListSelector = ".cards__list";
+// Button
+const profileEditButton = document.querySelector("#profile-edit-button");
+const profileAddButton = document.querySelector("#profile-add-button");
+
+const cardsListSelector = ".cards__list";
+
+export {
+  initialCards,
+  settings,
+  profileEditButton,
+  profileAddButton,
+  cardsListSelector,
+};

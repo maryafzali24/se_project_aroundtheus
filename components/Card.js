@@ -1,11 +1,3 @@
-// import {
-//   openPopup,
-//   closePopup,
-//   handleEscClose,
-//   closeModalOnRemoteClick,
-//   handleOverlay,
-// } from "../utils/utils.js";
-
 const imgPreviewModal = document.querySelector("#preview-image-modal");
 const previewText = document.querySelector(".modal__image-title");
 const image = imgPreviewModal.querySelector(".modal__image-preview");
@@ -15,7 +7,6 @@ export default class Card {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
-    // this._popupWithImage = popupWithImage;
     this._handleCardClick = handleCardClick;
   }
 
