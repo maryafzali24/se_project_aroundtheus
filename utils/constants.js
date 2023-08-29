@@ -40,8 +40,8 @@ const settings = {
 };
 
 // Button
-const profileEditButton = document.querySelector("#profile-edit-button");
-const profileAddButton = document.querySelector("#profile-add-button");
+// export const profileEditButton = document.querySelector("#profile-edit-button");
+// export const profileAddButton = document.querySelector("#profile-add-button");
 //inputs
 export const nameInput = document.querySelector('input[name="name"]');
 export const descriptionInput = document.querySelector(
@@ -50,10 +50,4 @@ export const descriptionInput = document.querySelector(
 
 const cardsListSelector = ".cards__list";
 
-export {
-  initialCards,
-  settings,
-  profileEditButton,
-  profileAddButton,
-  cardsListSelector,
-};
+export { initialCards, settings, cardsListSelector };

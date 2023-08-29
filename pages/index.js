@@ -84,6 +84,24 @@ const iamgePreviewPopup = new PopupWithImage({
   popupSelector: "#preview-image-modal",
 });
 
+/* ----------------------- */
+/*      Event Listner      */
+/* ----------------------- */
+// eneble event listeners in each form
+editProfilePopup.setEventListeners();
+addCardPopup.setEventListeners();
+iamgePreviewPopup.setEventListeners();
+
+const renderCard = (cardData) => {
+  const newCard = new Card(
+    cardData,
+    cardSelector,
+    iamgePreviewPopup,
+    (title, link) => imgPreviewModal.open(title, link)
+  );
+  section.addItem(newCard.getView());
+};
+
 const section = new Section(
   {
     items: initialCards,
@@ -116,23 +134,6 @@ enableValidation(settings);
 /* ------------------ */
 /*      Functions     */
 /* ------------------ */
-
-const setEditPopupValues = () => {
-  const { name, job } = userInfo.getUserInfo();
-  nameInput.value = name;
-  descriptionInput.value = job;
-};
-
-const renderCard = (cardData) => {
-  const newCard = new Card(
-    cardData,
-    cardSelector,
-    iamgePreviewPopup,
-    (title, link) => imgPreviewModal.open(title, link)
-  );
-  section.addItem(newCard.getView());
-};
-
 function handleEditProfileSubmit(name, description) {
   userInfo.setUserInfo({
     name: name,
@@ -145,19 +146,15 @@ function handleAddCardSubmit(name, link) {
   renderCard({ name: name, link: link });
   addCardPopup.close();
 }
-// const newCard = createCard(cardData, cardSelector);
-// section.addItem(newCard);
+
+const setEditPopupValues = () => {
+  const { name, job } = userInfo.getUserInfo();
+  nameInput.value = name;
+  descriptionInput.value = job;
+};
 
 // render initialcards
 section.renderItems();
-
-/* ----------------------- */
-/*      Event Listner      */
-/* ----------------------- */
-// eneble event listeners in each form
-editProfilePopup.setEventListeners();
-addCardPopup.setEventListeners();
-iamgePreviewPopup.setEventListeners();
 
 // handle the profile edit popup
 profileEditButton.addEventListener("click", () => {
@@ -167,7 +164,7 @@ profileEditButton.addEventListener("click", () => {
 });
 
 //handle the photo add popup
-addCardPopup.addEventListener("click", () => {
+addNewCardButton.addEventListener("click", () => {
   formValidators["add-card-form"].resetValidation();
   addCardPopup.open();
 });
