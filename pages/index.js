@@ -11,6 +11,8 @@ import {
   initialCards,
   cardsListSelector,
   settings,
+  nameInput,
+  descriptionInput,
 } from "../utils/constants.js";
 
 // import {
@@ -66,30 +68,28 @@ const addCardUrl = addCardForm.querySelector("#modal-form-url");
 
 const cardSelector = "#card-template";
 
-// const userInfo = new UserInfo({
-//   nameSelector: ".profile__title",
-//   jobSelector: ".profile__description",
-// });
-// const editProfilePopup = new PopupWithForm(
-//   "#profile-edit-modal",
-//   ({ name, description }) => handleEditProfileSubmit(name, description)
-// );
+const userInfo = new UserInfo({
+  nameSelector: ".profile__title",
+  jobSelector: ".profile__description",
+});
+const editProfilePopup = new PopupWithForm(
+  "#profile-edit-modal",
+  ({ name, description }) => handleEditProfileSubmit(name, description)
+);
 
-// const addCardPopup = new PopupWithForm("#add-card-modal", ({ title, link }) => {
-//   handleAddCardSubmit(title, link);
-// });
-// const iamgePreviewPopup = new PopupWithImage({
-//   popupSelector: "#preview-image-modal",
-// });
+const addCardPopup = new PopupWithForm("#add-card-modal", ({ title, link }) => {
+  handleAddCardSubmit(title, link);
+});
+const iamgePreviewPopup = new PopupWithImage({
+  popupSelector: "#preview-image-modal",
+});
 
 const section = new Section(
   {
     items: initialCards,
-    renderer: (cardData) => {
-      const newCard = createCard(cardData, cardSelector);
-      section.addItem(newCard);
-    },
+    renderer: renderCard,
   },
+
   cardsListSelector
 );
 
@@ -117,27 +117,36 @@ enableValidation(settings);
 /*      Functions     */
 /* ------------------ */
 
-function createCard(cardData, cardTemplate) {
-  const cardElement = new Card(cardData, cardTemplate, (cardData) => {
-    imgPreviewModal.open(cardData);
-  });
-  return cardElement.getView();
-}
+const setEditPopupValues = () => {
+  const { name, job } = userInfo.getUserInfo();
+  nameInput.value = name;
+  descriptionInput.value = job;
+};
 
-function handleEditProfileSubmit(obj) {
-  const { name, description } = obj;
-  userInfo.setUserInfo(name, description);
+const renderCard = (cardData) => {
+  const newCard = new Card(
+    cardData,
+    cardSelector,
+    iamgePreviewPopup,
+    (title, link) => imgPreviewModal.open(title, link)
+  );
+  section.addItem(newCard.getView());
+};
+
+function handleEditProfileSubmit(name, description) {
+  userInfo.setUserInfo({
+    name: name,
+    job: description,
+  });
   editProfilePopup.close();
 }
 
-function handleAddCardSubmit(obj) {
-  const cardData = {
-    name: obj.title,
-    link: obj.image,
-  };
-  const newCard = createCard(cardData, cardSelector);
-  section.addItem(newCard);
+function handleAddCardSubmit(name, link) {
+  renderCard({ name: name, link: link });
+  addCardPopup.close();
 }
+// const newCard = createCard(cardData, cardSelector);
+// section.addItem(newCard);
 
 // render initialcards
 section.renderItems();
@@ -146,20 +155,19 @@ section.renderItems();
 /*      Event Listner      */
 /* ----------------------- */
 // eneble event listeners in each form
-// editProfilePopup.setEventListeners();
-// addCardPopup.setEventListeners();
-// iamgePreviewPopup.setEventListeners();
+editProfilePopup.setEventListeners();
+addCardPopup.setEventListeners();
+iamgePreviewPopup.setEventListeners();
 
 // handle the profile edit popup
 profileEditButton.addEventListener("click", () => {
-  const { name, description } = userInfo.getUserInfo();
-  editProfilePopup.setInputValues({ name, description });
-  editProfilePopup.open();
   formValidators["edit-profile-form"].resetValidation();
+  setEditPopupValues();
+  editProfilePopup.open();
 });
 
-// handle the photo add popup
-// addCardPopup.addEventListener("click", () => {
-//   addCardPopup.open();
-//   formValidators["add-card-form"].resetValidation();
-// });
+//handle the photo add popup
+addCardPopup.addEventListener("click", () => {
+  formValidators["add-card-form"].resetValidation();
+  addCardPopup.open();
+});

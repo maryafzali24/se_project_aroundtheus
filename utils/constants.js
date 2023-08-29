@@ -42,6 +42,11 @@ const settings = {
 // Button
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileAddButton = document.querySelector("#profile-add-button");
+//inputs
+export const nameInput = document.querySelector('input[name="name"]');
+export const descriptionInput = document.querySelector(
+  'input[name="description"]'
+);
 
 const cardsListSelector = ".cards__list";
 
