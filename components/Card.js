@@ -1,21 +1,22 @@
-const imgPreviewModal = document.querySelector("#preview-image-modal");
-const previewText = document.querySelector(".modal__image-title");
-const image = imgPreviewModal.querySelector(".modal__image-preview");
+// const imgPreviewModal = document.querySelector("#preview-image-modal");
+// const previewText = document.querySelector(".modal__image-title");
+// const image = imgPreviewModal.querySelector(".modal__image-preview");
 
 export default class Card {
-  constructor({ name, link }, cardSelector, handleCardClick) {
+  constructor({ name, link }, cardSelector, popupWithImage, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._popupWithImage = popupWithImage;
     this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
-    // this._cardElement
-    //   .querySelector(".card__image")
-    //   .addEventListener("click", () => {
-    //     this._handleImageClick();
-    //   });
+    this._cardElement
+      .querySelector(".card__image")
+      .addEventListener("click", () => {
+        this._handleCardClick(this._name, this._link);
+      });
 
     this._cardElement
       .querySelector(".card__like-button")

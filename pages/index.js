@@ -97,7 +97,7 @@ const renderCard = (cardData) => {
     cardData,
     cardSelector,
     iamgePreviewPopup,
-    (title, link) => imgPreviewModal.open(title, link)
+    (title, link) => iamgePreviewPopup.open(title, link)
   );
   section.addItem(newCard.getView());
 };
@@ -135,10 +135,8 @@ enableValidation(settings);
 /*      Functions     */
 /* ------------------ */
 function handleEditProfileSubmit(name, description) {
-  userInfo.setUserInfo({
-    name: name,
-    job: description,
-  });
+  console.log(name, description);
+  userInfo.setUserInfo(name, description);
   editProfilePopup.close();
 }
 
