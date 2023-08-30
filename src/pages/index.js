@@ -13,51 +13,9 @@ import {
   settings,
   nameInput,
   descriptionInput,
+  addNewCardButton,
+  profileEditButton,
 } from "../utils/constants.js";
-
-/* *************************************************************** */
-/*                            Elements                              */
-/* *************************************************************** */
-const cardTemplate = document
-  .querySelector("#card-template")
-  .content.querySelector(".card");
-
-const imgPreviewModal = document.querySelector("#preview-image-modal");
-const imagePreview = imgPreviewModal.querySelector(".modal__image-preview");
-const imgpreviewTitle = imgPreviewModal.querySelector(".modal__image-title");
-const imgPreviewCloseButton = imgPreviewModal.querySelector(
-  "#modal-preview-close-button"
-);
-const modals = document.querySelectorAll(".modal");
-
-//Wrappers
-const cardsWrap = document.querySelector(".cards__list");
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const addCardModal = document.querySelector("#add-card-modal");
-const profileForm = profileEditModal.querySelector(".modal__form");
-const addCardForm = addCardModal.querySelector("#add-card-form");
-
-//Buttons and other DOM nodes
-const profileEditButton = document.querySelector("#profile-edit-button");
-const modalEditCloseButton =
-  profileEditModal.querySelector("#edit-close-button");
-const addCardCloseButton = addCardModal.querySelector("#card-close-button");
-const profileTitle = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
-
-// Add new card
-const addNewCardButton = document.querySelector(".profile__add-button");
-
-// Form data
-const inputName = document.querySelector("#modal-form-name");
-const inputDescription = document.querySelector("#modal-form-description");
-
-const addCardTitle = addCardForm.querySelector("#modal-form-title");
-const addCardUrl = addCardForm.querySelector("#modal-form-url");
-
-/* ******************************************************************************* */
-/*                                 Functions                                       */
-/* ******************************************************************************* */
 
 const cardSelector = "#card-template";
 

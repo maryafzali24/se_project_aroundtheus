@@ -9,18 +9,12 @@ export default class PopupwithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._inputList = this._popupForm.querySelectorAll(".modal__input");
   }
-
+  // reset the form once the popup is closed
   close() {
     super.close();
     this._popupForm.reset();
-    this._popupForm.removeEventListener("submit", this._submitForm);
   }
-
-  // _getInputValues() {
-  //   this._formValues = {};
-  //   this.inputList.forEach((value, key) => (this._formValues[key] = value));
-  // }
-
+  //collects data from all the input fields and returns that data as an object.
   _getInputValues() {
     const inputValues = {};
     for (const input of this._inputList) {
@@ -29,14 +23,7 @@ export default class PopupwithForm extends Popup {
 
     return inputValues;
   }
-
-  //   setEventListeners() {
-  //     super.setEventListeners();
-  //     this._popupForm.addEventListener("submit", () => {
-  //       this.handleFormSubmit(this._getInputValues());
-  //     });
-  //   }
-  // }
+  // add submit event listener to the form and click handler to the close icon
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
@@ -45,7 +32,7 @@ export default class PopupwithForm extends Popup {
       this._handleFormSubmit(inputValues);
     });
   }
-
+  // set user information to form
   setInputValues(data) {
     this._inputList.forEach((input) => {
       input.value = data[input.name];
