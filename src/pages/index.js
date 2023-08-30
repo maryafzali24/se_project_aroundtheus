@@ -5,7 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-// import "../pages/index.css";
+import "../pages/index.css";
 
 import {
   initialCards,
@@ -14,13 +14,6 @@ import {
   nameInput,
   descriptionInput,
 } from "../utils/constants.js";
-
-// import {
-//   openPopup,
-//   isEscEvent,
-//   closePopup,
-//   handleOverlay,
-// } from "../utils/utils.js";
 
 /* *************************************************************** */
 /*                            Elements                              */
