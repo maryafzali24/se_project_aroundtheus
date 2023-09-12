@@ -21,7 +21,7 @@ import {
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "d5ba1edf-a507-42df-ae07-8c282987aa40",
+    authorization: "cafa9df5-1a10-4858-9dbc-3cddb902f867",
     "Content-Type": "application/json",
   },
 });
@@ -34,18 +34,28 @@ const userInfo = new UserInfo({
 
 let section;
 
-const renderCard = (data) => {
-  const cardElement = new Card(
-    {
-      data: data,
-      handleImageClick: (imageData) => {
-        iamgePreviewPopup.open(imageData.name, imageData.link);
-      },
-    },
-    "#card-template"
+// const renderCard = (data) => {
+//   const cardElement = new Card(
+//     {
+//       data: data,
+//       handleImageClick: (imageData) => {
+//         iamgePreviewPopup.open(imageData.title, imageData.link);
+//       },
+//     },
+//     "#card-template"
+//   );
+//   section.addItem(cardElement.getView());
+//   // document.querySelector(".cards__list").prepend(cardElement.getView());
+// };
+
+const renderCard = (cardData) => {
+  const newCard = new Card(
+    cardData,
+    cardSelector,
+    iamgePreviewPopup,
+    (title, link) => iamgePreviewPopup.open(title, link)
   );
-  section.addItem(cardElement.getView());
-  // document.querySelector(".cards__list").prepend(cardElement.getView());
+  section.addItem(newCard.getView());
 };
 
 section = new Section(

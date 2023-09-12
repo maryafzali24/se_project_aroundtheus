@@ -1,11 +1,10 @@
 export default class Card {
-  constructor({ data }, cardSelector, popupWithImage, handleCardClick) {
-    this._name = data.name;
+  constructor({ name, link }, cardSelector, popupWithImage, handleCardClick) {
+    this._name = name;
     console.log(this._name);
-    this._link = data.link;
+    this._link = link;
     console.log(this._link);
-    this._id = data._id;
-    this._isLiked = data.isLiked;
+
     this._cardSelector = cardSelector;
     console.log(this._cardSelector);
     this._popupWithImage = popupWithImage;
@@ -31,10 +30,8 @@ export default class Card {
     this._cardElement = null;
   }
 
-  _setLike() {
-    if (this._isLiked) {
-      this._likeButton.classList.toggle("card__like-button_active");
-    }
+  _handleLikeIcon() {
+    this._likeButton.classList.toggle("card__like-button_active");
   }
 
   getView() {
