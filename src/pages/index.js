@@ -5,6 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 import "../pages/index.css";
 
 import {
@@ -17,20 +18,74 @@ import {
   profileEditButton,
 } from "../utils/constants.js";
 
-const cardSelector = "#card-template";
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "123217ca-a6b2-4680-8ff5-e94e4242346c",
+    "Content-Type": "application/json",
+  },
+});
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__description",
+  avatarSelector: "profile__image",
 });
-const editProfilePopup = new PopupWithForm(
-  "#profile-edit-modal",
-  ({ name, description }) => handleEditProfileSubmit(name, description)
+
+let section;
+
+const renderCard = (cardData) => {
+  const cardElement = new Card(
+    {
+      data: cardData,
+      handleImageClick: (imageData) => {
+        iamgePreviewPopup.open(imageData.name, imageData.link);
+      },
+    },
+    "#card-template"
+  );
+  section.addItem(cardElement.getView());
+  // document.querySelector(".cards__list").prepend(cardElement.getView());
+};
+
+section = new Section(
+  {
+    // items: cardData,
+
+    renderer: renderCard,
+  },
+  cardsListSelector
 );
 
-const addCardPopup = new PopupWithForm("#add-card-modal", ({ title, link }) => {
-  handleAddCardSubmit(title, link);
+Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
+  ([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    section.renderItems(cards);
+  }
+);
+
+const editProfilePopup = new PopupWithForm("#profile-edit-modal", (data) => {
+  return api
+    .updateUserInfo(data)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
+
+const addCardPopup = new PopupWithForm("#add-card-modal", (data) => {
+  return api
+    .addNewCards(data)
+    .then((res) => {
+      renderCard(res);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
+
 const iamgePreviewPopup = new PopupWithImage({
   popupSelector: "#preview-image-modal",
 });
@@ -42,25 +97,6 @@ const iamgePreviewPopup = new PopupWithImage({
 editProfilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 iamgePreviewPopup.setEventListeners();
-
-const renderCard = (cardData) => {
-  const newCard = new Card(
-    cardData,
-    cardSelector,
-    iamgePreviewPopup,
-    (title, link) => iamgePreviewPopup.open(title, link)
-  );
-  section.addItem(newCard.getView());
-};
-
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-
-  cardsListSelector
-);
 
 /* ----------------------- */
 /*     Form Validation     */
@@ -85,25 +121,25 @@ enableValidation(settings);
 /* ------------------ */
 /*      Functions     */
 /* ------------------ */
-function handleEditProfileSubmit(name, description) {
-  console.log(name, description);
-  userInfo.setUserInfo(name, description);
-  editProfilePopup.close();
-}
+// function handleEditProfileSubmit(name, description) {
+//   console.log(name, description);
+//   userInfo.setUserInfo(name, description);
+//   editProfilePopup.close();
+// }
 
-function handleAddCardSubmit(name, link) {
-  renderCard({ name: name, link: link });
-  addCardPopup.close();
-}
+// function handleAddCardSubmit(name, link) {
+//   renderCard({ name: name, link: link });
+//   addCardPopup.close();
+// }
 
 const setEditPopupValues = () => {
-  const { name, job } = userInfo.getUserInfo();
-  nameInput.value = name;
-  descriptionInput.value = job;
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData.name;
+  descriptionInput.value = userData.job;
 };
 
 // render initialcards
-section.renderItems();
+// section.renderItems();
 
 // handle the profile edit popup
 profileEditButton.addEventListener("click", () => {
