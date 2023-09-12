@@ -34,10 +34,10 @@ const userInfo = new UserInfo({
 
 let section;
 
-const renderCard = (cardData) => {
+const renderCard = (data) => {
   const cardElement = new Card(
     {
-      data: cardData,
+      data: data,
       handleImageClick: (imageData) => {
         iamgePreviewPopup.open(imageData.name, imageData.link);
       },

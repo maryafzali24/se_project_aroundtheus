@@ -1,10 +1,13 @@
 export default class Card {
-  constructor(data, cardSelector, popupWithImage, handleCardClick) {
+  constructor({ data }, cardSelector, popupWithImage, handleCardClick) {
     this._name = data.name;
+    console.log(this._name);
     this._link = data.link;
+    console.log(this._link);
     this._id = data._id;
     this._isLiked = data.isLiked;
     this._cardSelector = cardSelector;
+    console.log(this._cardSelector);
     this._popupWithImage = popupWithImage;
     this._handleCardClick = handleCardClick;
   }
