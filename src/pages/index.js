@@ -34,29 +34,27 @@ const userInfo = new UserInfo({
 
 let section;
 
-// const renderCard = (data) => {
-//   const cardElement = new Card(
-//     {
-//       data: data,
-//       handleImageClick: (imageData) => {
-//         iamgePreviewPopup.open(imageData.title, imageData.link);
-//       },
-//     },
-//     "#card-template"
-//   );
-//   section.addItem(cardElement.getView());
-//   // document.querySelector(".cards__list").prepend(cardElement.getView());
-// };
-
-const renderCard = (cardData) => {
-  const newCard = new Card(
-    cardData,
-    cardSelector,
-    iamgePreviewPopup,
-    (title, link) => iamgePreviewPopup.open(title, link)
-  );
-  section.addItem(newCard.getView());
+const renderCard = (data) => {
+  const cardElement = new Card(data, "#card-template", (imageData) => {
+    iamgePreviewPopup.open(imageData.name, imageData.link); // TODO: fix the iamgePreviewPopup spelling
+  });
+  console.log("000");
+  console.log(cardElement);
+  // section.addItem(cardElement.getView());
+  document.querySelector(".cards__list").prepend(cardElement.getView());
 };
+
+// const renderCard = (cardData) => {
+//   const newCard = new Card(
+//     cardData,
+//     cardSelector,
+//     handleImageClick: (imageData) => {
+//       iamgePreviewPopup.open(imageData.name, imageData.link);
+//     },
+
+//   );
+//   section.addItem(newCard.getView());
+// };
 
 section = new Section(
   {

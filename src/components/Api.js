@@ -29,26 +29,23 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  updateUserInfo(name, job) {
+  updateUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
         name: name,
-        job: job,
+        about: about,
       }),
     }).then(this._checkResponse);
   }
 
-  addNewCards(name, link) {
+  addNewCards(data) {
     console.log("Api adding card");
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        link: link,
-      }),
+      body: JSON.stringify(data),
     }).then(this._checkResponse);
   }
 }

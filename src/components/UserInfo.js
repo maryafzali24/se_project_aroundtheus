@@ -12,9 +12,9 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ nameInput, jobInput }) {
-    this._name.textContent = nameInput;
-    this._job.textContent = jobInput;
+  setUserInfo({ name, about }) {
+    this._name.textContent = name;
+    this._job.textContent = about;
   }
 
   // setAvatar(avatar) {
