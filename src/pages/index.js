@@ -7,6 +7,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import "../pages/index.css";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 import {
   initialCards,
@@ -29,52 +30,12 @@ const api = new Api({
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__description",
-  avatarSelector: "profile__image",
+  avatarSelector: ".profile__image",
 });
 
-let section;
-
-const renderCard = (data) => {
-  const cardElement = new Card(data, "#card-template", (imageData) => {
-    iamgePreviewPopup.open(imageData.name, imageData.link); // TODO: fix the iamgePreviewPopup spelling
-  });
-  console.log("000");
-  console.log(cardElement);
-  // section.addItem(cardElement.getView());
-  document.querySelector(".cards__list").prepend(cardElement.getView());
-};
-
-// const renderCard = (cardData) => {
-//   const newCard = new Card(
-//     cardData,
-//     cardSelector,
-//     handleImageClick: (imageData) => {
-//       iamgePreviewPopup.open(imageData.name, imageData.link);
-//     },
-
-//   );
-//   section.addItem(newCard.getView());
-// };
-
-section = new Section(
-  {
-    // items: cardData,
-
-    renderer: renderCard,
-  },
-  cardsListSelector
-);
-
-Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
-  ([userData, cards]) => {
-    userInfo.setUserInfo(userData);
-    section.renderItems(cards);
-  }
-);
-
-const editProfilePopup = new PopupWithForm("#profile-edit-modal", (data) => {
+const editAvatarPopup = new PopupWithForm("#modal-edit-avatar", (data) => {
   return api
-    .updateUserInfo(data)
+    .updateAvatar(data)
     .then((res) => {
       userInfo.setUserInfo(res);
     })
@@ -82,6 +43,63 @@ const editProfilePopup = new PopupWithForm("#profile-edit-modal", (data) => {
       console.error(error);
     });
 });
+editAvatarPopup.setEventListeners();
+
+document
+  .querySelector("#profile-image-pencil")
+  .addEventListener("click", () => {
+    formValidators["edit-avatar-form"].resetValidation();
+    editAvatarPopup.open();
+  });
+
+const confirmAction = (card, cardId) => {
+  return api
+    .deleteCard(cardId)
+    .then(() => {
+      card.removeCard();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+const deleteCardPopup = new PopupWithConfirmation({
+  popupSelector: "#delete-card-modal",
+  handleConfirm: confirmAction,
+});
+
+deleteCardPopup.setEventListeners();
+
+const iamgePreviewPopup = new PopupWithImage({
+  popupSelector: "#preview-image-modal",
+});
+
+let section;
+
+const renderCard = (data) => {
+  const cardElement = new Card(
+    {
+      data: data,
+      handleImageClick: (imageData) => {
+        iamgePreviewPopup.open(imageData.name, imageData.link);
+      },
+      handleDeleteCard: (card, cardId) => {
+        deleteCardPopup.open(card, cardId);
+      },
+      confirmPopup: deleteCardPopup,
+      api: api,
+    },
+    "#card-template"
+  );
+
+  section.addItem(cardElement.getView());
+};
+section = new Section(
+  {
+    renderer: renderCard,
+  },
+  cardsListSelector
+);
 
 const addCardPopup = new PopupWithForm("#add-card-modal", (data) => {
   return api
@@ -94,8 +112,24 @@ const addCardPopup = new PopupWithForm("#add-card-modal", (data) => {
     });
 });
 
-const iamgePreviewPopup = new PopupWithImage({
-  popupSelector: "#preview-image-modal",
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    section.renderItems(cards);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+const editProfilePopup = new PopupWithForm("#profile-edit-modal", (data) => {
+  return api
+    .updateUserInfo(data)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
 /* ----------------------- */
@@ -145,9 +179,6 @@ const setEditPopupValues = () => {
   nameInput.value = userData.name;
   descriptionInput.value = userData.job;
 };
-
-// render initialcards
-// section.renderItems();
 
 // handle the profile edit popup
 profileEditButton.addEventListener("click", () => {
