@@ -22,7 +22,7 @@ import {
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "cafa9df5-1a10-4858-9dbc-3cddb902f867",
+    authorization: "7ed3bb2f-7b5a-422d-a884-e2fa31c7bd62",
     "Content-Type": "application/json",
   },
 });
@@ -81,7 +81,7 @@ const renderCard = (data) => {
     {
       data: data,
       handleImageClick: (imageData) => {
-        iamgePreviewPopup.open(imageData.name, imageData.link);
+        iamgePreviewPopup.open(imageData);
       },
       handleDeleteCard: (card, cardId) => {
         deleteCardPopup.open(card, cardId);

@@ -17,6 +17,7 @@ export default class UserInfo {
     this._name.textContent = name;
     console.log(this._name);
     this._job.textContent = about;
+    console.log(avatar);
     this._profileImage.src = avatar;
   }
 }
