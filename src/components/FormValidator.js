@@ -1,6 +1,7 @@
 class FormValidator {
   constructor(settings, formElement) {
     this._formElement = formElement;
+    console.log(this._formElement);
     this._inputSelector = settings.inputSelector;
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)

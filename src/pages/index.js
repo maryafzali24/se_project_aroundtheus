@@ -5,7 +5,9 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 import "../pages/index.css";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 import {
   initialCards,
@@ -17,22 +19,139 @@ import {
   profileEditButton,
 } from "../utils/constants.js";
 
-const cardSelector = "#card-template";
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "7ed3bb2f-7b5a-422d-a884-e2fa31c7bd62",
+    "Content-Type": "application/json",
+  },
+});
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__description",
+  avatarSelector: ".profile__image",
 });
-const editProfilePopup = new PopupWithForm(
-  "#profile-edit-modal",
-  ({ name, description }) => handleEditProfileSubmit(name, description)
-);
 
-const addCardPopup = new PopupWithForm("#add-card-modal", ({ title, link }) => {
-  handleAddCardSubmit(title, link);
+const editAvatarPopup = new PopupWithForm("#modal-edit-avatar", (data) => {
+  return api
+    .updateAvatar(data)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
+editAvatarPopup.setEventListeners();
+
+document
+  .querySelector("#profile-image-pencil")
+  .addEventListener("click", () => {
+    formValidators["edit-avatar-form"].resetValidation();
+    editAvatarPopup.open();
+  });
+
+const confirmAction = (card, cardId) => {
+  return api
+    .deleteCard(cardId)
+    .then(() => {
+      card.removeCard();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+const deleteCardPopup = new PopupWithConfirmation({
+  popupSelector: "#delete-card-modal",
+  handleConfirm: confirmAction,
+});
+
+deleteCardPopup.setEventListeners();
+
 const iamgePreviewPopup = new PopupWithImage({
   popupSelector: "#preview-image-modal",
+});
+
+let section;
+
+function createCard(item) {
+  const cardElement = new Card(
+    {
+      data: data,
+      handleImageClick: (imageData) => {
+        iamgePreviewPopup.open(imageData);
+      },
+      handleDeleteCard: (card, cardId) => {
+        deleteCardPopup.open(card, cardId);
+      },
+      confirmPopup: deleteCardPopup,
+      api: api,
+    },
+    "#card-template"
+  );
+  return cardElement.getView();
+}
+
+const renderCard = (data) => {
+  const cardElement = createCard(data);
+  section.addItem(cardElement);
+};
+
+// const renderCard = (data) => {
+//   const cardElement = new Card(
+//     {
+//       data: data,
+//       handleImageClick: (imageData) => {
+//         iamgePreviewPopup.open(imageData);
+//       },
+//       handleDeleteCard: (card, cardId) => {
+//         deleteCardPopup.open(card, cardId);
+//       },
+//       confirmPopup: deleteCardPopup,
+//       api: api,
+//     },
+//     "#card-template"
+//   );
+
+//   section.addItem(cardElement.getView());
+// };
+section = new Section(
+  {
+    renderer: renderCard,
+  },
+  cardsListSelector
+);
+
+const addCardPopup = new PopupWithForm("#add-card-modal", (data) => {
+  return api
+    .addNewCards(data)
+    .then((res) => {
+      renderCard(res);
+    })
+
+    .catch(console.error);
+});
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    section.renderItems(cards);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+const editProfilePopup = new PopupWithForm("#profile-edit-modal", (data) => {
+  return api
+    .updateUserInfo(data)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
 /* ----------------------- */
@@ -42,25 +161,6 @@ const iamgePreviewPopup = new PopupWithImage({
 editProfilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 iamgePreviewPopup.setEventListeners();
-
-const renderCard = (cardData) => {
-  const newCard = new Card(
-    cardData,
-    cardSelector,
-    iamgePreviewPopup,
-    (title, link) => iamgePreviewPopup.open(title, link)
-  );
-  section.addItem(newCard.getView());
-};
-
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-
-  cardsListSelector
-);
 
 /* ----------------------- */
 /*     Form Validation     */
@@ -85,25 +185,12 @@ enableValidation(settings);
 /* ------------------ */
 /*      Functions     */
 /* ------------------ */
-function handleEditProfileSubmit(name, description) {
-  console.log(name, description);
-  userInfo.setUserInfo(name, description);
-  editProfilePopup.close();
-}
-
-function handleAddCardSubmit(name, link) {
-  renderCard({ name: name, link: link });
-  addCardPopup.close();
-}
 
 const setEditPopupValues = () => {
-  const { name, job } = userInfo.getUserInfo();
-  nameInput.value = name;
-  descriptionInput.value = job;
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData.name;
+  descriptionInput.value = userData.job;
 };
-
-// render initialcards
-section.renderItems();
 
 // handle the profile edit popup
 profileEditButton.addEventListener("click", () => {

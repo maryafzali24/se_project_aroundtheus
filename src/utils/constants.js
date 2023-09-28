@@ -44,9 +44,7 @@ const addNewCardButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector("#profile-edit-button");
 //inputs
 export const nameInput = document.querySelector('input[name="name"]');
-export const descriptionInput = document.querySelector(
-  'input[name="description"]'
-);
+export const descriptionInput = document.querySelector('input[name="about"]');
 
 const cardsListSelector = ".cards__list";
 

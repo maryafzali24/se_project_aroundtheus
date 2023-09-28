@@ -11,10 +11,10 @@ export default class PopupWithImage extends Popup {
     );
   }
   //Add an image to the popup and the corresponding image src, attribute along with a caption for the image.
-  open(name, link) {
-    this._previewImage.src = link;
-    this._previewImage.alt = name;
-    this._previewImageTitle.textContent = name;
+  open(data) {
+    this._previewImage.src = data.link;
+    this._previewImage.alt = data.name;
+    this._previewImageTitle.textContent = data.name;
     super.open();
   }
 }

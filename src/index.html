@@ -24,11 +24,20 @@
 
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <div class="profile__avatar-container">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="Avatar"
+              class="profile__image"
+            />
+            <button
+              aria-label="edit button"
+              class="profile__image-pencil"
+              type="button"
+              id="profile-image-pencil"
+            ></button>
+          </div>
+
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -54,6 +63,27 @@
         <p class="footer__copyright">&copy; 2023 Around The U.S.</p>
       </footer>
     </div>
+    <!--------- Edit Profile Image ----------->
+    <div class="modal" id="modal-edit-avatar">
+      <div class="modal__container modal__container-avatar">
+        <button class="modal__close-button"></button>
+        <h2 class="modal__heading-avatar">Change profile picture</h2>
+        <form class="modal__form" id="edit-avatar-form" name="edit-avatar-form">
+          <label for="avatar" class="modal__form-label">
+            <input
+              type="url"
+              name="avatar"
+              id="avatar"
+              placeholder="Link"
+              class="modal__input"
+              required
+            />
+            <span id="avatar-error" class="modal__error"></span>
+          </label>
+          <button class="modal__button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
     <!-----------------Edit modal------------->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
@@ -69,29 +99,31 @@
           name="edit-profile-form"
           novalidate
         >
-          ><input
-            type="text"
-            name="name"
-            placeholder="Name"
-            class="modal__input modal__input_type_name"
-            id="modal-form-name"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <span class="modal__error" id="modal-form-name-error"></span>
+          <fieldset class="modal__form-fieldset">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              class="modal__input modal__input_type_name"
+              id="modal-form-name"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="modal__error" id="modal-form-name-error"></span>
 
-          <input
-            type="text"
-            name="description"
-            placeholder="Description"
-            class="modal__input modal__input_type_description"
-            id="modal-form-description"
-            minlength="2"
-            maxlength="200"
-            required
-          />
-          <span class="modal__error" id="modal-form-description-error"></span>
+            <input
+              type="text"
+              name="about"
+              placeholder="Description"
+              class="modal__input modal__input_type_description"
+              id="modal-form-description"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span class="modal__error" id="modal-form-description-error"></span>
+          </fieldset>
 
           <button
             class="button modal__button modal__button_disabled"
@@ -118,26 +150,29 @@
           name="add-card-form"
           novalidate
         >
-          <input
-            class="modal__input modal__input_type_title"
-            id="modal-form-title"
-            name="title"
-            placeholder="Title"
-            type="text"
-            minlength="1"
-            maxlength="30"
-            required
-          />
-          <span class="modal__error" id="modal-form-title-error"></span>
-          <input
-            class="modal__input modal__input_type_link"
-            id="modal-form-url"
-            name="link"
-            placeholder="Link"
-            type="url"
-            required
-          />
-          <span class="modal__error" id="modal-form-url-error"></span>
+          <fieldset class="modal__form-fieldset">
+            <input
+              class="modal__input modal__input_type_title"
+              id="modal-form-title"
+              name="name"
+              placeholder="Name"
+              type="text"
+              minlength="1"
+              maxlength="30"
+              required
+            />
+            <span class="modal__error" id="modal-form-title-error"></span>
+            <input
+              class="modal__input modal__input_type_link"
+              id="modal-form-url"
+              name="link"
+              placeholder="Link"
+              type="url"
+              required
+            />
+            <span class="modal__error" id="modal-form-url-error"></span>
+          </fieldset>
+
           <button
             class="button modal__button modal__button_disabled"
             type="submit"
@@ -158,6 +193,20 @@
         ></button>
         <img class="modal__image-preview" src="#" alt="" />
         <p class="modal__image-title"></p>
+      </div>
+    </div>
+    <!-- Delete Card Modal -->
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container modal__container-delete">
+        <button
+          class="modal__close-button"
+          id="delete-close-button"
+          type="button"
+        ></button>
+        <form class="modal__form">
+          <h2 class="modal__heading modal__heading-delete">Are you sure?</h2>
+          <button class="button modal__form-button" type="submit">Yes</button>
+        </form>
       </div>
     </div>
 
