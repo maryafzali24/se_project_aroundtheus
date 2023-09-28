@@ -76,7 +76,7 @@ const iamgePreviewPopup = new PopupWithImage({
 
 let section;
 
-const renderCard = (data) => {
+function createCard(item) {
   const cardElement = new Card(
     {
       data: data,
@@ -91,9 +91,32 @@ const renderCard = (data) => {
     },
     "#card-template"
   );
+  return cardElement.getView();
+}
 
-  section.addItem(cardElement.getView());
+const renderCard = (data) => {
+  const cardElement = createCard(data);
+  section.addItem(cardElement);
 };
+
+// const renderCard = (data) => {
+//   const cardElement = new Card(
+//     {
+//       data: data,
+//       handleImageClick: (imageData) => {
+//         iamgePreviewPopup.open(imageData);
+//       },
+//       handleDeleteCard: (card, cardId) => {
+//         deleteCardPopup.open(card, cardId);
+//       },
+//       confirmPopup: deleteCardPopup,
+//       api: api,
+//     },
+//     "#card-template"
+//   );
+
+//   section.addItem(cardElement.getView());
+// };
 section = new Section(
   {
     renderer: renderCard,
@@ -107,9 +130,8 @@ const addCardPopup = new PopupWithForm("#add-card-modal", (data) => {
     .then((res) => {
       renderCard(res);
     })
-    .catch((error) => {
-      console.error(error);
-    });
+
+    .catch(console.error);
 });
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -163,16 +185,6 @@ enableValidation(settings);
 /* ------------------ */
 /*      Functions     */
 /* ------------------ */
-// function handleEditProfileSubmit(name, description) {
-//   console.log(name, description);
-//   userInfo.setUserInfo(name, description);
-//   editProfilePopup.close();
-// }
-
-// function handleAddCardSubmit(name, link) {
-//   renderCard({ name: name, link: link });
-//   addCardPopup.close();
-// }
 
 const setEditPopupValues = () => {
   const userData = userInfo.getUserInfo();
